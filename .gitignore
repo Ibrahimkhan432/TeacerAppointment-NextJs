@@ -1,0 +1,63 @@
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Testing output
+coverage/
+*.lcov
+
+# Vercel deployment
+.vercel/
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+
+# Next.js static exports
+export/
+
+# Next.js cache
+.next/cache
+
+# Yarn integrity and debug files
+.yarn-integrity
+.yarnrc.yml
+
+# Other files that shouldn't be committed
+*.tsbuildinfo
+*.eslintcache
+
+# TypeScript
+*.d.ts
+
+# Ignore styled components generated files
+*.css.map
+
+# Ignore Storybook static files
+storybook-static/
+
+# Miscellaneous
+*.orig
