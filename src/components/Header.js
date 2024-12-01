@@ -17,7 +17,7 @@ import { auth, signOut } from "../../auth";
 
 export default async function Header() {
   const session = await auth();
-  // console.log("session>>", session);
+  console.log("session :>>", session);
   return (
     <div className="bg-slate-300 my- container w-[1300px] mx-auto rounded-r-full my-3">
       <div className="justify-between container mx-auto flex items-center  border-4 rounded-r-full border-slate-400">
@@ -46,14 +46,14 @@ export default async function Header() {
                   <MenubarItem>Appointments</MenubarItem>
                 </Link>
                 <MenubarSeparator />
-                  <form
-                    action={async () => {
-                      "use server";
-                      await signOut("google")
-                    }}
-                  >
-                    <Button variant={'outline'}>Logout</Button>
-                  </form>
+                <form
+                  action={async () => {
+                    "use server";
+                    await signOut("google")
+                  }}
+                >
+                  <Button variant={'outline'}>Logout</Button>
+                </form>
               </MenubarContent>
             </MenubarMenu>
           </Menubar>
