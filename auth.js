@@ -17,7 +17,10 @@ async function handleLogin(obj) {
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [Google],
+  providers: [Google({
+    clientId: process.env.AUTH_GOOGLE_ID,
+    clientSecret: process.env.AUTH_GOOGLE_SECRET
+  })],
   callbacks: {
     async signIn({ account, profile }) {
       if (account.provider === "google") {
@@ -29,16 +32,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
         const user = await handleLogin(obj)
         // console.log("user",obj);
-        
+
         return true; // Do different verification for other providers that don't have `email_verified`
       }
       return true;
     },
-   async jwt({ token }) {
-const user = await handleLogin({email:token.email})
-// console.log("user>",user);
-token._id=user._id;
-token._role=user.role;
+    async jwt({ token }) {
+      const user = await handleLogin({ email: token.email })
+      // console.log("user>",user);
+      token._id = user._id;
+      token._role = user.role;
 
       return token;
     },
