@@ -7,7 +7,7 @@ export async function POST(req) {
   await connectDB();
   try {
     const obj = await req.json();
-// console.log("object in backend",obj);
+    // console.log("object in backend",obj);
 
     const isUserRequestedBefore = await RequestModal.findOne({
       user: obj.user,
@@ -65,6 +65,42 @@ export async function GET(req) {
   );
 }
 
-export async function PUT(req) {}
+export async function PUT(req) {
+  await connectDB();
+  try {
+    const obj = await req.json();
+    let { id, status } = obj;
 
-export async function DELETE(req) {}
+    const request = await RequestModal.findOne({ _id: id });
+    console.log(request);
+
+    let user = await UserModal.findOneAndUpdate({ _id: request.user }, { role: "teacher" });
+    console.log("user", user);
+    const updated = await RequestModal.findOneAndUpdate(
+      {
+        _id: id,
+      },
+      { status: status }
+    ).exec();
+
+    console.log("update", updated)
+    return Response.json(
+      {
+        error: false,
+        msg: "Requests updated Successfully",
+        request: updated,
+      },
+      { status: 200 }
+    );
+  } catch (err) {
+    return Response.json(
+      {
+        error: false,
+        msg: "Something went wrong",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req) { }

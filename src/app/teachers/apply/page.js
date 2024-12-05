@@ -10,14 +10,14 @@ export default async function ApplyAsTeacher() {
         Apply as a Teacher in our Platform
       </h1>
       <p className="text-secondary-foreground my-5">
-        Apply as a Doctor in our Platform Apply as a Doctor in our Platform
-        Apply as a Doctor in our Platform Apply as a Doctor in our Platform
-        Apply as a Doctor in our Platform Apply as a Doctor in our Platform
-        Apply as a Doctor in our Platform Apply as a Doctor in our Platform
-        Apply as a Doctor in our Platform{" "}
+        Apply as a Teacher in our Platform Apply as a Teacher in our Platform
+        Apply as a Teacher in our Platform Apply as a Teacher in our Platform
+        Apply as a Teacher in our Platform Apply as a Teacher in our Platform
+        Apply as a Teacher in our Platform Apply as a Teacher in our Platform
+        Apply as a Teacher in our Platform{" "}
       </p>
 
-            <TeacherForm session={session}/>
-        </div>
-    )
+      <TeacherForm session={session} />
+    </div>
+  )
 }
