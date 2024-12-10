@@ -17,10 +17,14 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { DollarSign, TimerIcon,PersonStandingIcon } from "lucide-react";
+import { DollarSign, TimerIcon, PersonStandingIcon } from "lucide-react";
+import { getRequest } from "@/action/requests";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import TeacherCard from "./TeacherCard";
 
-export default function TeacherSection({ isHome }) {
-  const filtered = isHome ? teachers.slice(0, 6) : teachers;
+export default async function TeacherSection({ isHome }) {
+  const { requests } = await getRequest("accepted");
+  // console.log('teacher section me requests', requests)
   return (
     <div className="container my-10 w-[1300px] mx-auto">
       <div className="flex justify-between my-3">
@@ -45,45 +49,9 @@ export default function TeacherSection({ isHome }) {
         )}
       </div>
       <div className="grid lg:grid-cols-3 gap-5">
-        {filtered.map((teacher) => (
-          <Card key={teacher}>
-            <CardHeader>
-              <CardTitle className="text-2xl shadow-lg w-1/2">{teacher.name}</CardTitle>
-              <CardDescription className="text-xl">
-                {teacher.category}
-              </CardDescription>
-            </CardHeader>
-            {!isHome && ( 
-            <CardContent>
-              <div className=" flex justify-between">
-                <div className="flex gap-2 items-center">
-                  <PersonStandingIcon />
-                  <h1>Gender</h1>
-                </div>
-                <h1>{teacher.gender}</h1>
-              </div>
-              <div className=" flex justify-between">
-                <div className="flex gap-2 items-center">
-                <TimerIcon />
-                <h1>Appointment Time</h1>
-                </div>
-                <h1>{teacher.appointmentTime}</h1>
-              </div>
-              <div className=" flex justify-between">
-                <div className="flex gap-3 items-center">
-                  <DollarSign />
-                <h1>Fees</h1>
-                </div>
-                <h1>{teacher.fees}</h1>
-              </div>
-            </CardContent>
-            )}
-            <CardFooter>
-              <Link href={`teachers/${teacher.id}`} >
-              <Button>See Detail</Button>
-              </Link>
-            </CardFooter>
-          </Card>
+        {requests.map((request) => (
+                  <TeacherCard key={request._id} request={request} isAdmin={false} />
+
         ))}
       </div>
     </div>

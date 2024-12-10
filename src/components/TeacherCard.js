@@ -11,12 +11,15 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
-import { HomeIcon, PlusIcon, ClockIcon, CheckIcon, XIcon } from "lucide-react";
+import { HomeIcon, ClockIcon, CheckIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import TeacherDetailSheet from "./TeacherDetailSheet";
 
-const TeacherCard = ({ request, isAdmin, onAccept, onReject }) => (
+const TeacherCard = ({ request, isAdmin, onAccept, onReject }) => {
+
+    return (
     <Card key={request._id}>
+    
         <CardHeader className="flex flex-row items-center space-x-4">
             <Avatar className="h-10 w-10">
                 <AvatarImage src={request.user.picture} alt={request.user.firstName} />
@@ -29,7 +32,7 @@ const TeacherCard = ({ request, isAdmin, onAccept, onReject }) => (
                 <CardTitle>{`${request.user.firstName} ${request.user.lastName || ""
                     }`}</CardTitle>
                 <CardDescription className="capitalize">
-                    {request.specialization}
+                    {request.status}
                 </CardDescription>
             </div>
         </CardHeader>
@@ -106,5 +109,6 @@ const TeacherCard = ({ request, isAdmin, onAccept, onReject }) => (
         </CardFooter>
     </Card>
 );
+}
 
 export default TeacherCard;

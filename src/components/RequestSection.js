@@ -13,6 +13,7 @@ import {
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import TeacherCard from "./TeacherCard";
 import { updateRequest } from "@/action/requests";
+// import { updateRequest } from "@/a/ction/requests";
 
 
 export default function TeacherRequests({ requests, status }) {
@@ -27,7 +28,7 @@ export default function TeacherRequests({ requests, status }) {
     const { replace } = useRouter();
 
     const handleAction = (type, requestId) => {
-        console.log("is status", type, requestId);
+        // console.log("status", type, requestId);
 
         setSelectedAction({ type, requestId });
         setDialogOpen(true);
@@ -35,10 +36,10 @@ export default function TeacherRequests({ requests, status }) {
 
     const confirmAction = async () => {
         if (selectedAction.type === "accept") {
-            console.log("selectedAction=>", selectedAction.requestId);
             await updateRequest(selectedAction.requestId, "accepted");
+            console.log("acceptedAction=>", selectedAction.requestId);
         } else if (selectedAction.type === "reject") {
-            console.log("selectedAction=>", selectedAction.requestId);
+            console.log("rejectedAction=>", selectedAction.requestId);
             await updateRequest(selectedAction.requestId, "rejected");
         }
         setDialogOpen(false);
@@ -55,7 +56,7 @@ export default function TeacherRequests({ requests, status }) {
         }
         replace(`${pathname}?${params.toString()}`);
 
-        console.log("params=>", params);
+        // console.log("params=>", params);
     }, [activeFilter]);
 
 

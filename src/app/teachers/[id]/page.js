@@ -1,176 +1,115 @@
-import { teachers } from "@/components/Data";
-import { Calendar } from "@/components/ui/calendar"
-import Image from "next/image";
-import { DollarSign, TimerIcon, PersonStandingIcon, Link, ArrowBigRight, ArrowRightCircleIcon,} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import {
+  HomeIcon,
+  ClockIcon,
+  UserIcon as GenderMaleIcon,
+  GraduationCapIcon,
+  StethoscopeIcon,
+  PhoneIcon,
+  MapPinIcon,
+} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DatePicker } from "@/components/DatePicker";
+import { auth } from "../../../../auth";
+import { getSingleRequest } from "@/action/requests";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
+export default async function TeacherDetail({ params }) {
+  const session = await auth();
+  const { requests } = await getSingleRequest(params.id);
+  const teacherInfo = requests;
+  console.log("teacherInfo>>", teacherInfo);
 
-export default function TeacherDetail({ params }) {
-  const teacherInfo = teachers.find(
-    (teacherInfo) => teacherInfo.id == params.id
-  );
 
   return (
-    <div className="min-h-screen">
-      <div className="container  py-10 mx-auto">
-        <div className="lg:w-4/5  mx-auto flex flex-wrap">
-        <div className="lg:w-1/2 relative lg:h-auto h-64 object-cover object-center rounded">
-          <Image
-        fill={true}
-            alt="ecommerce"
-            src="https://images.unsplash.com/photo-1664382951771-40432ecc81bd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHRlYWNoZXJ8ZW58MHx8MHx8fDA%3D"
-          />
-        </div>
-          <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-            <h2 className="text-sm title-font text-gray-500 tracking-widest">
-              {teacherInfo.category}
-            </h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-              {teacherInfo.name}
-            </h1>
-            <div className="flex mb-4">
-              <span className="flex items-center">
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="w-4 h-4 text-indigo-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="w-4 h-4 text-indigo-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="w-4 h-4 text-indigo-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="w-4 h-4 text-indigo-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="w-4 h-4 text-indigo-500"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <span className="text-gray-600 ml-3">4 Reviews</span>
-              </span>
-              <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
-                <a className="text-gray-500">
-                  <svg
-                    fill="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                  </svg>
-                </a>
-                <a className="text-gray-500">
-                  <svg
-                    fill="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                  </svg>
-                </a>
-                <a className="text-gray-500">
-                  <svg
-                    fill="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    className="w-5 h-5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                  </svg>
-                </a>
-              </span>
+    // <div><h1>kuch bhi</h1></div>
+    <div className="min-h-screen bg-background">
+      <div className="container py-10 mx-auto">
+        <Card className="w-full max-w-4xl mx-auto">
+          <CardHeader className="flex flex-col sm:flex-row items-center gap-4">
+            <Avatar className="w-20 h-20">
+              <AvatarImage
+                src={teacherInfo.user.picture}
+                alt={`${teacherInfo.user.firstName} ${teacherInfo.user.lastName}`}
+              />
+              <AvatarFallback>
+                {teacherInfo.user.firstName[0]}
+                {teacherInfo?.user?.lastName?.[0] || ""}
+              </AvatarFallback>
+            </Avatar>
+            <div className="text-center sm:text-left">
+              <CardTitle className="text-3xl font-bold">{`Dr. ${teacherInfo.user.firstName
+                } ${teacherInfo?.user?.lastName || ""}`}</CardTitle>
+              <p className="text-muted-foreground">
+                {teacherInfo.specialization} Specialist
+              </p>
             </div>
-            <p className="leading-relaxed">
-              Fam locavore kickstarter distillery. Mixtape chillwave tumeric
-              sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo
-              juiceramps cornhole raw denim forage brooklyn. Everyday carry +1
-              seitan poutine tumeric. Gastropub blue bottle austin listicle
-              pour-over, neutra jean shorts keytar banjo tattooed umami
-              cardigan.
-            </p>
-            <div className="my-5">
-              <div className=" flex justify-between my-2">
-                <div className="flex gap-2 items-center">
-                  <PersonStandingIcon />
-                  <h1>Gender</h1>
-                </div>
-                <h1>{teacherInfo.gender}</h1>
-              </div>
-              <div className=" flex justify-between my-2">
-                <div className="flex gap-2 items-center">
-                  <TimerIcon />
-                  <h1>Appointment Time</h1>
-                </div>
-                <h1>{teacherInfo.appointmentTime}</h1>
-              </div>
-              <div className=" flex justify-between my-2">
-                <div className="flex gap-3 items-center">
-                  <DollarSign />
-                  <h1>Fees</h1>
-                </div>
-                <h1>{teacherInfo.fees}</h1>
-              </div>
-              <div className=" flex justify-between py-3">
-                <div className="flex gap-3 items-center">
-                  <h1 className="font-bold bg-slate-300 rounded-r-full p-2">Select Appointment Date</h1>
-                  <ArrowRightCircleIcon/>
-                </div>
-                <DatePicker/>
-              </div>
-              <div>
-  
-              </div>
-              <Button className={"w-full my-3"}> Book Appointment</Button>
+          </CardHeader>
+          <CardContent className="grid gap-6">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <InfoItem
+                icon={<GraduationCapIcon />}
+                label="Degree"
+                value={teacherInfo.degree}
+              />
+              <InfoItem
+                icon={<StethoscopeIcon />}
+                label="Experience"
+                value={teacherInfo.experience}
+              />
+              <InfoItem
+                icon={<GenderMaleIcon />}
+                label="Gender"
+                value={teacherInfo.gender}
+              />
+              <InfoItem
+                icon={<ClockIcon />}
+                label="Appointment Time"
+                value={teacherInfo.appointmentTime}
+              />
+              <InfoItem
+                icon={<HomeIcon />}
+                label="Fees"
+                value={`$${teacherInfo.fees}`}
+              />
+              <InfoItem
+                icon={<PhoneIcon />}
+                label="Contact"
+                value={teacherInfo.number}
+              />
+              <InfoItem
+                icon={<MapPinIcon />}
+                label="Address"
+                value={teacherInfo.address}
+              />
             </div>
-          </div>
-        </div>
+            <div>
+              <h3 className="font-semibold mb-2">Bio</h3>
+              <p className="text-muted-foreground">{teacherInfo.bio}</p>
+            </div>
+            <div className="space-y-4">
+              <h1 className="font-bold">Book your Appointment Date</h1>
+              <DatePicker session={session} request={params.id} />
+            </div>
+
+            <Link href={""}>
+              <Button className="w-full">Book Appointment</Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function InfoItem({ icon, label, value }) {
+  return (
+    <div className="flex items-center gap-2">
+      {icon}
+      <div>
+        <p className="text-sm font-medium">{label}</p>
+        <p className="text-sm text-muted-foreground">{value}</p>
       </div>
     </div>
   );

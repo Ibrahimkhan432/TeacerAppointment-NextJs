@@ -1,14 +1,11 @@
-
 import connectDB from "@/lib/ConnectDb";
 import { RequestModal } from "@/lib/modal/RequestModal";
-
+import { UserModal } from "@/lib/modal/UserModal";
 
 export async function POST(req) {
   await connectDB();
   try {
     const obj = await req.json();
-    // console.log("object in backend",obj);
-
     const isUserRequestedBefore = await RequestModal.findOne({
       user: obj.user,
     });
@@ -17,7 +14,7 @@ export async function POST(req) {
       return Response.json(
         {
           error: true,
-          msg: "You had already applied as a Teacher",
+          msg: "You had already applied as a teacher",
         },
         { status: 403 }
       );
@@ -70,12 +67,9 @@ export async function PUT(req) {
   try {
     const obj = await req.json();
     let { id, status } = obj;
-
     const request = await RequestModal.findOne({ _id: id });
-    console.log(request);
 
-    let user = await UserModal.findOneAndUpdate({ _id: request.user }, { role: "teacher" });
-    console.log("user", user);
+    await UserModal.findOneAndUpdate({ _id: request.user }, { role: "teacher" });
     const updated = await RequestModal.findOneAndUpdate(
       {
         _id: id,
@@ -83,7 +77,6 @@ export async function PUT(req) {
       { status: status }
     ).exec();
 
-    console.log("update", updated)
     return Response.json(
       {
         error: false,
@@ -103,4 +96,4 @@ export async function PUT(req) {
   }
 }
 
-export async function DELETE(req) { }
+export async function DELETE(req) {}

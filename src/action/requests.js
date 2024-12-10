@@ -21,8 +21,17 @@ export async function getRequest(status) {
 
   return requests;
 }
+export async function getSingleRequest(id) {
+
+  let request = await fetch(`${process.env.BASE_URL}api/requests/${id}`);
+  request = await request.json();
+  console.log("request in >>>", request);
+  
+  return request;
+}
 
 export async function updateRequest(id, status) {
+  console.log('updaterequest function ', status)
   let requests = await fetch(`${process.env.BASE_URL}api/requests`, {
     method: "PUT",
     body: JSON.stringify({ id, status }),
