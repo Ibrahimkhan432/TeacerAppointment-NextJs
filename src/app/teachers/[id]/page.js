@@ -14,7 +14,6 @@ import { auth } from "../../../../auth";
 import { getSingleRequest } from "@/action/requests";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
 export default async function TeacherDetail({ params }) {
   const session = await auth();
   const { requests } = await getSingleRequest(params.id);
@@ -89,13 +88,9 @@ export default async function TeacherDetail({ params }) {
               <p className="text-muted-foreground">{teacherInfo.bio}</p>
             </div>
             <div className="space-y-4">
-              <h1 className="font-bold">Book your Appointment Date</h1>
               <DatePicker session={session} request={params.id} />
             </div>
 
-            <Link href={""}>
-              <Button className="w-full">Book Appointment</Button>
-            </Link>
           </CardContent>
         </Card>
       </div>

@@ -50,7 +50,7 @@ export default async function TeacherSection({ isHome }) {
       </div>
       <div className="grid lg:grid-cols-3 gap-5">
         {requests.map((request) => (
-                  <TeacherCard key={request._id} request={request} isAdmin={false} />
+          <TeacherCard key={request._id} request={request} isAdmin={false} />
 
         ))}
       </div>

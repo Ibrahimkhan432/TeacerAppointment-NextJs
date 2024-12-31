@@ -9,7 +9,7 @@ export async function addRequest(data) {
     method: "POST",
     body: JSON.stringify(data),
   });
-  add = add.json();
+  add = await add.json();
 
   return add;
 }
@@ -17,7 +17,7 @@ export async function addRequest(data) {
 export async function getRequest(status) {
   let requests = await fetch(`${process.env.BASE_URL}api/requests?status=${status ? status : ""}`
   );
-  requests = requests.json();
+  requests = await requests.json();
 
   return requests;
 }
@@ -25,8 +25,8 @@ export async function getSingleRequest(id) {
 
   let request = await fetch(`${process.env.BASE_URL}api/requests/${id}`);
   request = await request.json();
-  console.log("request in >>>", request);
-  
+  // console.log("request in >>>", request);
+
   return request;
 }
 
@@ -36,7 +36,7 @@ export async function updateRequest(id, status) {
     method: "PUT",
     body: JSON.stringify({ id, status }),
   });
-  requests = requests.json();
+  requests = await requests.json();
   revalidatePath("/admin/requests");
   return requests;
 }

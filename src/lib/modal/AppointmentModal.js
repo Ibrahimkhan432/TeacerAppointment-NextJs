@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import { UserModal } from "./UserModal";
 const { Schema } = mongoose;
 
 const appointmentSchema = new Schema({
@@ -14,4 +14,4 @@ const appointmentSchema = new Schema({
 });
 
 export const AppointmentModal =
-  mongoose.models.Appointments || mongoose.model("Requests", appointmentSchema);
+  mongoose.models.Appointments || mongoose.model("Appointments", appointmentSchema);
