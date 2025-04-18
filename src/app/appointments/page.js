@@ -2,9 +2,9 @@ import { auth } from "../../../auth";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import AppointmentFilterTabs from "@/components/Tabs/Tabs";
-import TeacherAppointmentCard from "@/components/TeacherAppointmentCard/import TeacherAppointmentCard from \"@/components/TeacherAppointmentCard";
 import StudentAppointmentCard from "@/components/StudentAppointmentCard/StudentAppointmentCard";
 import { getAppointments } from "@/action/appointment";
+import TeacherAppointmentCard from "@/components/TeacherAppointmentCard/TeacherAppointmentCard";
 
 dayjs.extend(relativeTime);
 
